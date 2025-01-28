@@ -5,23 +5,23 @@ using UnityEngine;
 public class MovementScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Vector2 velcity;
+    private Vector2 velocity;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        velcity = new Vector2(0.1f,0f);
+        velocity = new Vector2(0f,0.15f);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown("w"))
+        if (Input.GetKey("w"))
         {
-           
+           rb.MovePosition(rb.position + velocity);
         }
-        if (Input.GetKeyDown("s"))
+        if (Input.GetKey("s"))
         {
-
+            rb.MovePosition(rb.position - velocity);
         }
     }
 
