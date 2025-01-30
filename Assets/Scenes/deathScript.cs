@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class deathScript : MonoBehaviour
 {
-    //public Collider2D Fcollider;
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
+    public Collider2D Fcollider;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
 
-    //    if (collision.CompareTag("pipe"))
-    //    {
-    //        Debug.Log("ded");
-    //        SceneManager.LoadScene(0);
-    //    }
+        if (collision.CompareTag("dead"))
+        {
+            Debug.Log("ded");
+            SceneManager.LoadScene(0);
+        }
 
-    //}
+    }
 }
