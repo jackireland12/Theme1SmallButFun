@@ -6,17 +6,20 @@ using UnityEngine;
 public class DetectScript : MonoBehaviour
 {
     public GameObject wall;
-    public Vector3 spawnpoint; 
-    
+    //private Vector2 spawnPosition;
 
+    private void Start()
+    {
+        var spawnPosition = new Vector2( 10.0f, Random.Range(-10.0f, 10.0f));
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collision Detected");
         if (collision.CompareTag("respawn"))
         {
-            Debug.Log("jfjj");
-            Instantiate(wall, spawnpoint, Quaternion.identity);
+            Debug.Log("spawnPosition");
+            Instantiate(wall, new  Vector2(10.0f, Random.Range(-5.0f,5.0f)), Quaternion.identity);
             Destroy(gameObject);
         }
 
