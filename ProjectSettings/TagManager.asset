@@ -6,6 +6,7 @@ TagManager:
   tags:
   - dead
   - respawn
+  - point
   layers:
   - Default
   - TransparentFX

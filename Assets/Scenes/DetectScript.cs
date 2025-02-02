@@ -18,12 +18,18 @@ public class DetectScript : MonoBehaviour
         Debug.Log("Collision Detected");
         if (collision.CompareTag("respawn"))
         {
-            Debug.Log("spawnPosition");
-            Instantiate(wall, new  Vector2(10.0f, Random.Range(-5.0f,5.0f)), Quaternion.identity);
-            Destroy(gameObject);
+            spawnObject();
         }
 
 
+    }
+    private void spawnObject()
+    {
+        Debug.Log("spawnPosition");
+        GameObject newRing = Instantiate(wall, new Vector2(10.0f, Random.Range(-5.0f, 5.0f)), Quaternion.identity);
+        Destroy(gameObject);
+        float randomScale = Random.Range(0.5f, 2f);
+        newRing.transform.localScale = Vector3.one *randomScale; 
     }
     //public float xdistance;
     //private void Update()
