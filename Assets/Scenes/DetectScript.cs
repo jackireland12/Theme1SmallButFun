@@ -7,10 +7,11 @@ public class DetectScript : MonoBehaviour
 {
     public GameObject wall;
     //private Vector2 spawnPosition;
-
+     points points;
     private void Start()
     {
         var spawnPosition = new Vector2( 10.0f, Random.Range(-10.0f, 10.0f));
+        points = GameObject.FindGameObjectWithTag("Player").GetComponent<points>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +29,7 @@ public class DetectScript : MonoBehaviour
         Debug.Log("spawnPosition");
         GameObject newRing = Instantiate(wall, new Vector2(10.0f, Random.Range(-5.0f, 5.0f)), Quaternion.identity);
         Destroy(gameObject);
-        float randomScale = Random.Range(0.5f, 2f);
+        float randomScale = Random.Range(0.5f+points.pointsCount/7, 2f + points.pointsCount/7);
         newRing.transform.localScale = Vector3.one *randomScale; 
     }
     //public float xdistance;
