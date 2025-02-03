@@ -8,6 +8,8 @@ public class DetectScript : MonoBehaviour
     public GameObject wall;
     //private Vector2 spawnPosition;
      points points;
+    public static float baseScale = 1f;
+    public static float scaleIncreasePerPoint = 0.05f;
     private void Start()
     {
         var spawnPosition = new Vector2( 10.0f, Random.Range(-10.0f, 10.0f));
@@ -29,18 +31,17 @@ public class DetectScript : MonoBehaviour
         Debug.Log("spawnPosition");
         GameObject newRing = Instantiate(wall, new Vector2(10.0f, Random.Range(-5.0f, 5.0f)), Quaternion.identity);
         Destroy(gameObject);
-        float randomScale = Random.Range(0.5f+points.pointsCount/7, 2f + points.pointsCount/7);
+        float randomScale = Random.Range(0.4f+(points.pointsCount/20.0f), 1.5f + (points.pointsCount/20.0f));
         newRing.transform.localScale = Vector3.one *randomScale; 
+
     }
-    //public float xdistance;
-    //private void Update()
-    //{
-    //    if (this.transform.position.x <= xdistance)
-    //    {
-            
-    //        Debug.Log("jfjj");
-    //        Instantiate(wall, spawnpoint, Quaternion.identity);
-    //        Destroy(gameObject);
-    //    }
-    //}
+    public static void UpdateRingScales()
+    {
+        GameObject[] rings = GameObject.FindGameObjectsWithTag("dead");
+        foreach (GameObject ring in rings)
+        {
+            ring.transform.localScale *= (1 + scaleIncreasePerPoint);
+        }
+    }
+
 }
