@@ -6,6 +6,7 @@ public class points : MonoBehaviour
 {
     public float pointsCount;
     DetectScript ds;
+    public cameraController cc;
     private void Start()
     {
         ds  = GameObject.FindGameObjectWithTag("dead").GetComponent<DetectScript>();
@@ -17,6 +18,7 @@ public class points : MonoBehaviour
             pointsCount++;
             Debug.Log(pointsCount);
             DetectScript.UpdateRingScales();
+            cc.IncreaseFOV();
             GameObject.FindGameObjectsWithTag("dead");
             if (tag == "dead")
             {

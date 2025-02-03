@@ -10,6 +10,7 @@ public class DetectScript : MonoBehaviour
      points points;
     public static float baseScale = 1f;
     public static float scaleIncreasePerPoint = 0.05f;
+    public static float transitionDuration = 0.5f; // Duration of smooth transition
     private void Start()
     {
         var spawnPosition = new Vector2( 10.0f, Random.Range(-10.0f, 10.0f));
@@ -40,8 +41,30 @@ public class DetectScript : MonoBehaviour
         GameObject[] rings = GameObject.FindGameObjectsWithTag("dead");
         foreach (GameObject ring in rings)
         {
-            ring.transform.localScale *= (1 + scaleIncreasePerPoint);
+           // ring.transform.localScale *= (1 + scaleIncreasePerPoint);
+            ring.GetComponent<DetectScript>().StartCoroutine(SmoothScaleIncrease(ring));
         }
+    }
+    private static IEnumerator SmoothScaleIncrease(GameObject ring)
+    {
+        Vector3 startScale = ring.transform.localScale;
+        Vector3 endScale = startScale * (1 + scaleIncreasePerPoint);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < transitionDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / transitionDuration);
+            ring.transform.localScale = Vector3.Lerp(startScale, endScale, SmoothStep(t));
+            yield return null;
+        }
+
+        ring.transform.localScale = endScale;
+    }
+
+    private static float SmoothStep(float t)
+    {
+        return t * t * (3f - 2f * t);
     }
 
 }
